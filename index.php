@@ -20,9 +20,9 @@ if (!isset($pages[$page])) {
 $protectedPages = [
     'dashboard',
     'profile',
+    'edit-profile',
     'about',
     'contact',
-    'edit-profile'
 ];
 
 if (in_array($page, $protectedPages) && !isset($_SESSION['user'])) {
@@ -41,6 +41,10 @@ if (in_array($page, $protectedPages) && !isset($_SESSION['user'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>City College | <?php echo ucfirst($page); ?> </title>
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
     <link rel="stylesheet" href="style/style.css">
 
     <?php if ($page == 'login' || $page == 'signup') { ?>

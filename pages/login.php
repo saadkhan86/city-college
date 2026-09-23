@@ -20,7 +20,6 @@ if (isset($_POST['login'])) {
         $_SESSION['user'] = [
             'id' => $user['id'],
             'full_name' => $user['full_name'],
-            'email' => $user['email']
         ];
         $message = "Login successful";
         $messageType = "success";

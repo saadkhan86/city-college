@@ -33,23 +33,13 @@
 
     <?php if (isset($_SESSION['user'])) { ?>
 
-        <a href="index.php?page=profile" class="profile-btn">
+        <a
+            href="index.php?page=profile"
+            class="profile-btn"
+            title="My Profile"
+        >
 
-            <div class="profile-avatar">
-                <?php
-                echo strtoupper(
-                    substr($_SESSION['user']['full_name'], 0, 1)
-                );
-                ?>
-            </div>
-
-            <div class="profile-info">
-                <strong>
-                    <?php echo $_SESSION['user']['full_name']; ?>
-                </strong>
-
-                <span>My Profile</span>
-            </div>
+            <i class="fa-solid fa-user"></i>
 
         </a>
 

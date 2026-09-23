@@ -2,7 +2,18 @@
 <?php 
     if(isset($_SESSION['user'])){
         $user_id = $_SESSION['user']['id'];
-        
+        $query = "SELECT * FROM students WHERE id = $user_id";
+        $result = mysqli_query($conn, $query);
+        $user = mysqli_fetch_assoc($result);
+        $full_name = $user['full_name'];
+        $email = $user['email'];
+        $phone_number = $user['phone_number'];
+        $dob = $user['dob'];
+        $gender = $user['gender'];
+        $address = $user['address'];
+    }else{
+        header("Location:index.php?page=login.php");
+        exit;
     }    
     
 ?>
@@ -12,7 +23,7 @@
         <section class="profile-header">
 
             <div class="large-avatar">
-                AK
+                <?php echo $full_name[0]; ?>
             </div>
 
             <div class="profile-header-info">
@@ -22,17 +33,12 @@
                 </span>
 
                 <h1>
-                    Ali Khan
+                    <?php echo $full_name; ?>
                 </h1>
 
                 <p>
-                    Computer Science Student
+                    <?php echo $gender; ?>
                 </p>
-
-                <span class="student-id">
-                    Student ID: CC-2026-00125
-                </span>
-
             </div>
 
         </section>
@@ -49,10 +55,6 @@
 
                     <div>
                         <h2>Personal Information</h2>
-
-                        <p>
-                            Your basic personal details.
-                        </p>
                     </div>
 
                     <span class="card-header-icon">
@@ -70,7 +72,7 @@
                         </span>
 
                         <strong>
-                            Ali Khan
+                            <?php echo $full_name; ?>
                         </strong>
 
                     </div>
@@ -83,7 +85,7 @@
                         </span>
 
                         <strong>
-                            ali.khan@example.com
+                            <?php echo $email; ?>
                         </strong>
 
                     </div>
@@ -92,11 +94,11 @@
                     <div class="detail">
 
                         <span class="detail-label">
-                            Phone
+                            Phone Number
                         </span>
 
                         <strong>
-                            +92 300 1234567
+                            <?php echo $phone_number; ?>
                         </strong>
 
                     </div>
@@ -109,7 +111,7 @@
                         </span>
 
                         <strong>
-                            15 March 2004
+                            <?php echo $dob;?>
                         </strong>
 
                     </div>
@@ -122,7 +124,7 @@
                         </span>
 
                         <strong>
-                            Male
+                            <?php echo $gender;?>
                         </strong>
 
                     </div>
@@ -135,7 +137,7 @@
                         </span>
 
                         <strong>
-                            Multan, Pakistan
+                            <?php echo $address;?>
                         </strong>
 
                     </div>
@@ -161,10 +163,6 @@
 
                     <div>
                         <h2>Academic Information</h2>
-
-                        <p>
-                            Your college information.
-                        </p>
                     </div>
 
                     <span class="card-header-icon">
@@ -263,7 +261,7 @@
         <!-- Actions -->
         <div class="profile-actions">
 
-            <a href="dashboard.php" class="secondary-btn">
+            <a href="index.php?page=dashboard" class="secondary-btn">
                 ← Back to Dashboard
             </a>
 

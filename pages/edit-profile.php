@@ -1,14 +1,76 @@
+<?php
+
+if (!isset($_SESSION['user'])) {
+    header("Location: index.php?page=login");
+    exit;
+}
+
+$id = $_SESSION['user']['id'];
+
+
+// UPDATE PROFILE
+if (isset($_POST['update_profile'])) {
+
+    $full_name = $_POST['full_name'];
+    $phone_number = $_POST['phone_number'];
+    $dob = $_POST['dob'];
+    $gender = $_POST['gender'];
+    $address = $_POST['address'];
+
+    $query = "UPDATE students
+              SET
+                  full_name = '$full_name',
+                  phone_number = '$phone_number',
+                  dob = '$dob',
+                  gender = '$gender',
+                  address = '$address'
+              WHERE id = '$id'";
+
+    $result = mysqli_query($conn, $query);
+
+    if ($result) {
+
+        // Session mein bhi updated name rakh do
+        $_SESSION['user']['full_name'] = $full_name;
+
+        header("Location: index.php?page=profile");
+        exit;
+
+    } else {
+
+        echo "Profile update failed: " . mysqli_error($conn);
+    }
+}
+
+
+// GET USER DATA
+$query = "SELECT * FROM students WHERE id = '$id'";
+
+$result = mysqli_query($conn, $query);
+
+$user = mysqli_fetch_assoc($result);
+
+$full_name = $user['full_name'];
+$email = $user['email'];
+$phone_number = $user['phone_number'];
+$dob = $user['dob'];
+$gender = $user['gender'];
+$address = $user['address'];
+
+?>
 
 <main class="dashboard-container">
 
     <section class="profile-header">
 
         <div class="large-avatar">
+
             <?php
             echo strtoupper(
-                substr($_SESSION['user']['full_name'], 0, 2)
+                substr($full_name, 0, 2)
             );
             ?>
+
         </div>
 
         <div class="profile-header-info">
@@ -36,11 +98,13 @@
         <div class="profile-card-header">
 
             <div>
+
                 <h2>Personal Information</h2>
 
                 <p>
                     Update your basic personal details.
                 </p>
+
             </div>
 
             <span class="card-header-icon">
@@ -52,6 +116,7 @@
 
         <form method="POST" class="edit-profile-form">
 
+
             <!-- Full Name -->
             <div class="form-field">
 
@@ -62,7 +127,7 @@
                 <input
                     type="text"
                     name="full_name"
-                    value="<?php echo $_SESSION['user']['full_name']; ?>"
+                    value="<?php echo $full_name; ?>"
                     required
                 >
 
@@ -79,24 +144,24 @@
                 <input
                     type="email"
                     name="email"
-                    value="<?php echo $_SESSION['user']['email']; ?>"
-                    required
+                    value="<?php echo $email; ?>"
+                    readonly
                 >
 
             </div>
 
 
-            <!-- Phone -->
+            <!-- Phone Number -->
             <div class="form-field">
 
                 <label>
-                    Phone
+                    Phone Number
                 </label>
 
                 <input
                     type="text"
-                    name="phone"
-                    placeholder="+92 300 1234567"
+                    name="phone_number"
+                    value="<?php echo $phone_number; ?>"
                 >
 
             </div>
@@ -111,7 +176,8 @@
 
                 <input
                     type="date"
-                    name="date_of_birth"
+                    name="dob"
+                    value="<?php echo $dob; ?>"
                 >
 
             </div>
@@ -130,12 +196,25 @@
                         Select Gender
                     </option>
 
-                    <option value="male">
+                    <option
+                        value="male"
+                        <?php if ($gender == 'male') echo 'selected'; ?>
+                    >
                         Male
                     </option>
 
-                    <option value="female">
+                    <option
+                        value="female"
+                        <?php if ($gender == 'female') echo 'selected'; ?>
+                    >
                         Female
+                    </option>
+
+                    <option
+                        value="other"
+                        <?php if ($gender == 'other') echo 'selected'; ?>
+                    >
+                        Other
                     </option>
 
                 </select>
@@ -143,17 +222,18 @@
             </div>
 
 
-            <!-- City -->
+            <!-- Address -->
             <div class="form-field">
 
                 <label>
-                    City
+                    Address
                 </label>
 
                 <input
                     type="text"
-                    name="city"
-                    placeholder="Multan"
+                    name="address"
+                    value="<?php echo $address; ?>"
+                    placeholder="Enter your address"
                 >
 
             </div>
