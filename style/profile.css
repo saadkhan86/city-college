@@ -1,11 +1,13 @@
 .profile-header {
   display: flex;
   align-items: center;
+  justify-content: flex-start;
   gap: 25px;
   padding: 30px;
   margin-bottom: 25px;
   background: white;
   border-radius: 12px;
+  border-left: 4px solid var(--cc-navy);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
@@ -13,18 +15,16 @@
   width: 90px;
   height: 90px;
   flex-shrink: 0;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
-  background: #2563eb;
+  background: linear-gradient(135deg, var(--cc-navy) 0%, var(--cc-navy-light) 100%);
   color: white;
-
+  border: 3px solid var(--cc-red);
   border-radius: 50%;
-
   font-size: 28px;
   font-weight: bold;
+  box-shadow: 0 4px 14px var(--cc-navy-glow);
 }
 
 .profile-header-info {
@@ -34,8 +34,7 @@
 
 .profile-label {
   margin-bottom: 6px;
-
-  color: #2563eb;
+  color: var(--cc-red);
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 1px;
@@ -44,15 +43,16 @@
 .profile-header-info h1 {
   margin-bottom: 5px;
   font-size: 28px;
+  color: var(--cc-dark);
 }
 
 .profile-header-info p {
   margin-bottom: 8px;
-  color: #6b7280;
+  color: var(--cc-text-muted);
 }
 
 .student-id {
-  color: #6b7280;
+  color: var(--cc-text-muted);
   font-size: 13px;
 }
 
@@ -67,9 +67,9 @@
 
 .profile-card {
   background: white;
-  padding: 15px 25px;
+  padding: 20px 25px;
   border-radius: 12px;
-
+  border: 1px solid var(--cc-border);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
@@ -77,32 +77,30 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-
   margin-bottom: 20px;
 }
 
 .profile-card-header h2 {
   margin-bottom: 5px;
   font-size: 20px;
+  color: var(--cc-dark);
 }
 
 .profile-card-header p {
-  color: #6b7280;
+  color: var(--cc-text-muted);
   font-size: 14px;
 }
 
 .card-header-icon {
   width: 42px;
   height: 42px;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
-  background: #dbeafe;
+  background: var(--cc-navy-subtle);
+  color: var(--cc-navy);
   border-radius: 8px;
-
-  font-size: 20px;
+  font-size: 18px;
 }
 
 /* Details */
@@ -116,10 +114,8 @@
   display: flex;
   justify-content: space-between;
   gap: 20px;
-
   padding: 15px 0;
-
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid var(--cc-border);
 }
 
 .detail:last-child {
@@ -127,13 +123,14 @@
 }
 
 .detail-label {
-  color: #6b7280;
+  color: var(--cc-text-muted);
   font-size: 14px;
 }
 
 .detail strong {
   font-size: 14px;
   text-align: right;
+  color: var(--cc-dark);
 }
 
 /* Status */
@@ -141,24 +138,28 @@
 .detail strong.status {
   color: #16a34a;
 }
+
 .card-header-actions {
   text-align: right;
   padding: 20px 0px;
 }
 
 .edit-btn {
-  padding: 8px 12px;
-  background: #eff6ff;
-  color: #2563eb;
+  padding: 8px 14px;
+  background: var(--cc-navy-subtle);
+  color: var(--cc-navy);
   border-radius: 6px;
   text-decoration: none;
   font-size: 13px;
   font-weight: 600;
+  transition: all 0.2s ease;
 }
 
 .edit-btn:hover {
-  background: #dbeafe;
+  background: var(--cc-navy);
+  color: white;
 }
+
 /* Actions */
 
 .profile-actions {
@@ -172,34 +173,32 @@
 .secondary-btn,
 .logout-btn {
   display: inline-block;
-
   padding: 11px 18px;
-
   border-radius: 6px;
-
   text-decoration: none;
-
   font-size: 14px;
   font-weight: 600;
+  transition: all 0.2s ease;
 }
 
 .secondary-btn {
-  background: #e5e7eb;
-  color: #374151;
+  background: #e2e8f0;
+  color: #334155;
 }
 
 .secondary-btn:hover {
-  background: #d1d5db;
+  background: #cbd5e1;
 }
 
 .logout-btn {
-  background: #dc2626;
+  background: var(--cc-red);
   color: white;
 }
 
 .logout-btn:hover {
-  background: #b91c1c;
+  background: var(--cc-red-hover);
 }
+
 .edit-profile-form {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -213,27 +212,27 @@
 .edit-profile-form label {
   display: block;
   margin-bottom: 7px;
-
   font-size: 14px;
   font-weight: 600;
+  color: #374151;
 }
 
 .edit-profile-form input,
 .edit-profile-form select {
   width: 100%;
   padding: 12px;
-
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--cc-border);
   border-radius: 6px;
-
   font-family: inherit;
   font-size: 14px;
   outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .edit-profile-form input:focus,
 .edit-profile-form select:focus {
-  border-color: #2563eb;
+  border-color: var(--cc-navy);
+  box-shadow: 0 0 0 3px var(--cc-navy-glow);
 }
 
 .edit-profile-form .profile-actions {

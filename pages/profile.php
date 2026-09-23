@@ -26,21 +26,6 @@
                 <?php echo $full_name[0]; ?>
             </div>
 
-            <div class="profile-header-info">
-
-                <span class="profile-label">
-                    STUDENT PROFILE
-                </span>
-
-                <h1>
-                    <?php echo $full_name; ?>
-                </h1>
-
-                <p>
-                    <?php echo $gender; ?>
-                </p>
-            </div>
-
         </section>
 
 

@@ -78,7 +78,9 @@ if (in_array($page, $protectedPages) && !isset($_SESSION['user'])) {
     <?php } ?>
 
 
-    <?php include $pages[$page]; ?>
+    <main>
+        <?php include $pages[$page]; ?>
+    </main>
 
 
     <?php if ($page !== 'login' && $page !== 'signup') { ?>

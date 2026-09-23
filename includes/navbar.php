@@ -1,41 +1,35 @@
+<?php
+$currentPage = $_GET['page'] ?? 'dashboard';
+?>
 <nav class="navbar">
 
-    <div class="logo">
-
-        <div class="logo-icon">
-            CC
-        </div>
-
-        <div>
-            <h2>City College</h2>
-            <span>Student Portal</span>
-        </div>
-
+    <div class="logo-icon">
+        <a href="index.php?page=dashboard" title="City College Home">
+            <img src="images/logo.png" alt="City College Logo" class="logo">
+        </a>
     </div>
-
 
     <div class="nav-links">
 
-        <a href="index.php?page=dashboard">
+        <a href="index.php?page=dashboard" class="<?php echo ($currentPage === 'dashboard') ? 'active' : ''; ?>">
             Home
         </a>
 
-        <a href="index.php?page=about">
+        <a href="index.php?page=about" class="<?php echo ($currentPage === 'about') ? 'active' : ''; ?>">
             About
         </a>
 
-        <a href="index.php?page=contact">
+        <a href="index.php?page=contact" class="<?php echo ($currentPage === 'contact') ? 'active' : ''; ?>">
             Contact Us
         </a>
 
     </div>
 
-
     <?php if (isset($_SESSION['user'])) { ?>
 
         <a
             href="index.php?page=profile"
-            class="profile-btn"
+            class="profile-btn <?php echo ($currentPage === 'profile' || $currentPage === 'edit-profile') ? 'active' : ''; ?>"
             title="My Profile"
         >
 
