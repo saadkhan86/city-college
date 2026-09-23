@@ -1,0 +1,286 @@
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  padding: 30px;
+  margin-bottom: 25px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.large-avatar {
+  width: 90px;
+  height: 90px;
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #2563eb;
+  color: white;
+
+  border-radius: 50%;
+
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.profile-header-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-label {
+  margin-bottom: 6px;
+
+  color: #2563eb;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.profile-header-info h1 {
+  margin-bottom: 5px;
+  font-size: 28px;
+}
+
+.profile-header-info p {
+  margin-bottom: 8px;
+  color: #6b7280;
+}
+
+.student-id {
+  color: #6b7280;
+  font-size: 13px;
+}
+
+/* Profile Layout */
+
+.profile-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 10px 20px;
+  gap: 25px;
+}
+
+.profile-card {
+  background: white;
+  padding: 15px 25px;
+  border-radius: 12px;
+
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.profile-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  margin-bottom: 20px;
+}
+
+.profile-card-header h2 {
+  margin-bottom: 5px;
+  font-size: 20px;
+}
+
+.profile-card-header p {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.card-header-icon {
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #dbeafe;
+  border-radius: 8px;
+
+  font-size: 20px;
+}
+
+/* Details */
+
+.profile-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.detail {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+
+  padding: 15px 0;
+
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.detail:last-child {
+  border-bottom: none;
+}
+
+.detail-label {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.detail strong {
+  font-size: 14px;
+  text-align: right;
+}
+
+/* Status */
+
+.detail strong.status {
+  color: #16a34a;
+}
+.card-header-actions {
+  text-align: right;
+  padding: 20px 0px;
+}
+
+.edit-btn {
+  padding: 8px 12px;
+  background: #eff6ff;
+  color: #2563eb;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.edit-btn:hover {
+  background: #dbeafe;
+}
+/* Actions */
+
+.profile-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  margin-top: 25px;
+}
+
+.secondary-btn,
+.logout-btn {
+  display: inline-block;
+
+  padding: 11px 18px;
+
+  border-radius: 6px;
+
+  text-decoration: none;
+
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.secondary-btn {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.secondary-btn:hover {
+  background: #d1d5db;
+}
+
+.logout-btn {
+  background: #dc2626;
+  color: white;
+}
+
+.logout-btn:hover {
+  background: #b91c1c;
+}
+.edit-profile-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.edit-profile-form .form-field {
+  margin-bottom: 0;
+}
+
+.edit-profile-form label {
+  display: block;
+  margin-bottom: 7px;
+
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.edit-profile-form input,
+.edit-profile-form select {
+  width: 100%;
+  padding: 12px;
+
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+
+  font-family: inherit;
+  font-size: 14px;
+  outline: none;
+}
+
+.edit-profile-form input:focus,
+.edit-profile-form select:focus {
+  border-color: #2563eb;
+}
+
+.edit-profile-form .profile-actions {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 600px) {
+  .edit-profile-form {
+    grid-template-columns: 1fr;
+  }
+
+  .edit-profile-form .profile-actions {
+    grid-column: auto;
+  }
+}
+
+/* Responsive */
+
+@media (max-width: 800px) {
+  .profile-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .profile-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .detail {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .detail strong {
+    text-align: left;
+  }
+
+  .profile-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .secondary-btn,
+  .logout-btn {
+    text-align: center;
+  }
+}
