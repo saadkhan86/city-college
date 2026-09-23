@@ -20,18 +20,6 @@
                 </p>
 
             </div>
-
-            <div class="college-badge">
-
-                <span>CC</span>
-
-                <div>
-                    <strong>City College</strong>
-                    <small>Student Portal</small>
-                </div>
-
-            </div>
-
         </section>
 
 
@@ -62,11 +50,6 @@
                 </p>
 
             </div>
-
-            <div class="info-logo">
-                CC
-            </div>
-
         </section>
 
 
