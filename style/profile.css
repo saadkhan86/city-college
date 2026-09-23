@@ -15,8 +15,8 @@
 }
 
 .large-avatar {
-  width: 110px;
-  height: 110px;
+  width: 130px;
+  height: 130px;
   flex-shrink: 0;
   display: flex;
   align-items: center;
@@ -35,7 +35,9 @@
   position: relative;
   overflow: hidden;
   cursor: pointer;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
   user-select: none;
 }
 
