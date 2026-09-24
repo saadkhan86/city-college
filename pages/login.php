@@ -9,24 +9,27 @@ if (isset($_POST['login'])) {
     $password = $_POST['password'];
 
     $query = "SELECT * FROM students
-              WHERE email = '$email'
-              AND password = '$password'";
-    
+              WHERE email = '$email'";
     $result = mysqli_query($conn, $query);
 
+    
     if (mysqli_num_rows($result) == 1) {
         $user = mysqli_fetch_assoc($result);
-        
+        if( $password != $user['password']){
+            $message = "Invalid Password";
+            $messageType = "error";
+        }else{
         $_SESSION['user'] = [
             'id' => $user['id'],
             'full_name' => $user['full_name'],
         ];
         $message = "Login successful";
         $messageType = "success";
+    }
 
     } else {
 
-        $message = "Invalid Credentials";
+        $message = "User does not exist";
         $messageType = "error";
     }
 }

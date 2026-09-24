@@ -49,7 +49,7 @@ if (move_uploaded_file($file['tmp_name'], $destination)) {
     $oldResult = mysqli_query($conn, $oldQuery);
     if ($oldResult && $oldRow = mysqli_fetch_assoc($oldResult)) {
         $oldFile = $oldRow['profile_image'];
-        if (!empty($oldFile) && file_exists($oldFile)) {
+        if (!empty($oldFile) && file_exists($oldFile) && $oldFile != "uploads/avatars/default.jpg") {
             @unlink($oldFile);
         }
     }

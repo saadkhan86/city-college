@@ -15,13 +15,15 @@ $currentPage = $_GET['page'] ?? 'dashboard';
             Home
         </a>
 
+        <a href="index.php?page=contact" class="<?php echo ($currentPage === 'contact') ? 'active' : ''; ?>">
+            Contact Us
+        </a>
+
         <a href="index.php?page=about" class="<?php echo ($currentPage === 'about') ? 'active' : ''; ?>">
             About
         </a>
 
-        <a href="index.php?page=contact" class="<?php echo ($currentPage === 'contact') ? 'active' : ''; ?>">
-            Contact Us
-        </a>
+        
 
     </div>
 

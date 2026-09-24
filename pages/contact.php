@@ -16,7 +16,7 @@ if (isset($_POST["submit"])) {
             <div class="contact-form-card">
 
                 <h2>
-                    Send us a message
+                    Contact us directly
                 </h2>
 
                 <p>
