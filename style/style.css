@@ -274,3 +274,66 @@ footer {
     justify-content: center;
   }
 }
+
+/* =========================
+   Universal Alert & Notification Messages
+========================= */
+
+.alert-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+  animation: slideInDown 0.3s ease-out;
+}
+
+.alert-box i {
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.alert-box.success {
+  background-color: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  color: #065f46;
+}
+
+.alert-box.success i {
+  color: #10b981;
+}
+
+.alert-box.error {
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #991b1b;
+}
+
+.alert-box.error i {
+  color: #ef4444;
+}
+
+.alert-box.info {
+  background-color: #eff6ff;
+  border: 1px solid #bfdbfe;
+  color: #1e40af;
+}
+
+.alert-box.info i {
+  color: #3b82f6;
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

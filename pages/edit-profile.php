@@ -11,51 +11,68 @@ $id = $_SESSION['user']['id'];
 // UPDATE PROFILE
 if (isset($_POST['update_profile'])) {
 
-    $full_name = $_POST['full_name'];
-    $phone_number = $_POST['phone_number'];
-    $dob = $_POST['dob'];
-    $gender = $_POST['gender'];
-    $address = $_POST['address'];
+    $full_name = trim($_POST['full_name'] ?? '');
+    $phone_number = trim($_POST['phone_number'] ?? '');
+    $dob = trim($_POST['dob'] ?? '');
+    $gender = trim($_POST['gender'] ?? '');
+    $address = trim($_POST['address'] ?? '');
+
+    if (empty($full_name)) {
+        $_SESSION['flash_message'] = "Full name cannot be empty.";
+        $_SESSION['flash_type'] = "error";
+        header("Location: index.php?page=edit-profile");
+        exit;
+    }
+
+    $full_name_esc = mysqli_real_escape_string($conn, $full_name);
+    $phone_esc = mysqli_real_escape_string($conn, $phone_number);
+    $dob_esc = mysqli_real_escape_string($conn, $dob);
+    $gender_esc = mysqli_real_escape_string($conn, $gender);
+    $address_esc = mysqli_real_escape_string($conn, $address);
 
     $query = "UPDATE students
               SET
-                  full_name = '$full_name',
-                  phone_number = '$phone_number',
-                  dob = '$dob',
-                  gender = '$gender',
-                  address = '$address'
+                  full_name = '$full_name_esc',
+                  phone_number = '$phone_esc',
+                  dob = '$dob_esc',
+                  gender = '$gender_esc',
+                  address = '$address_esc'
               WHERE id = '$id'";
 
     $result = mysqli_query($conn, $query);
 
     if ($result) {
-
-        // Session mein bhi updated name rakh do
         $_SESSION['user']['full_name'] = $full_name;
-
-        header("Location: index.php?page=profile");
+        $_SESSION['flash_message'] = "Profile updated successfully!";
+        $_SESSION['flash_type'] = "success";
+        header("Location: index.php?page=edit-profile");
         exit;
-
     } else {
-
-        echo "Profile update failed: " . mysqli_error($conn);
+        $_SESSION['flash_message'] = "Profile update failed: " . mysqli_error($conn);
+        $_SESSION['flash_type'] = "error";
+        header("Location: index.php?page=edit-profile");
+        exit;
     }
 }
 
 
 // GET USER DATA
 $query = "SELECT * FROM students WHERE id = '$id'";
-
 $result = mysqli_query($conn, $query);
-
 $user = mysqli_fetch_assoc($result);
 
-$full_name = $user['full_name'];
-$email = $user['email'];
-$phone_number = $user['phone_number'];
-$dob = $user['dob'];
-$gender = $user['gender'];
-$address = $user['address'];
+$full_name = $user['full_name'] ?? '';
+$profile_image = $user['profile_image'] ?? '';
+$email = $user['email'] ?? '';
+$phone_number = $user['phone_number'] ?? '';
+$dob = $user['dob'] ?? '';
+$gender = $user['gender'] ?? '';
+$address = $user['address'] ?? '';
+
+// Flash message retrieval
+$flashMessage = $_SESSION['flash_message'] ?? null;
+$flashType = $_SESSION['flash_type'] ?? 'info';
+unset($_SESSION['flash_message'], $_SESSION['flash_type']);
 
 ?>
 
@@ -63,21 +80,7 @@ $address = $user['address'];
 
     <section class="profile-header">
 
-        <div class="large-avatar">
-
-            <?php
-            echo strtoupper(
-                substr($full_name, 0, 2)
-            );
-            ?>
-
-        </div>
-
         <div class="profile-header-info">
-
-            <span class="profile-label">
-                EDIT PROFILE
-            </span>
 
             <h1>
                 Edit Your Profile
@@ -94,6 +97,13 @@ $address = $user['address'];
 
     <!-- Edit Profile Form -->
     <div class="profile-card">
+
+        <?php if (!empty($flashMessage)) { ?>
+            <div class="alert-box <?php echo $flashType; ?>">
+                <i class="fa-solid <?php echo ($flashType === 'success') ? 'fa-circle-check' : 'fa-circle-exclamation'; ?>"></i>
+                <span><?php echo htmlspecialchars($flashMessage); ?></span>
+            </div>
+        <?php } ?>
 
         <div class="profile-card-header">
 

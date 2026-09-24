@@ -300,13 +300,6 @@
                 return;
             }
 
-            // Validate file size (5MB max)
-            if (file.size > 5 * 1024 * 1024) {
-                showFeedback("Image size must be less than 5MB.", "error");
-                fileInput.value = "";
-                return;
-            }
-
             // 1. Instant local image preview
             const reader = new FileReader();
             reader.onload = function (e) {

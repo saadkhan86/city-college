@@ -1,34 +1,82 @@
 <?php
+
 session_start();
+
 require_once "config/database.php";
 
-$page = $_GET['page'] ?? 'login';
+$isLoggedIn = isset($_SESSION['user']);
+
+$page = $_GET['page'] ?? null;
+
+if ($page === null) {
+
+    if ($isLoggedIn) {
+
+        $page = 'dashboard';
+
+    } else {
+
+        $page = 'login';
+    }
+}
+
 
 $pages = [
+
     'login' => 'pages/login.php',
+
     'signup' => 'pages/signup.php',
+
     'dashboard' => 'pages/dashboard.php',
+
     'profile' => 'pages/profile.php',
+
     'edit-profile' => 'pages/edit-profile.php',
+
     'about' => 'pages/about.php',
+
     'contact' => 'pages/contact.php'
+
 ];
 
 if (!isset($pages[$page])) {
-    $page = 'login';
+
+    $page = $isLoggedIn
+        ? 'dashboard'
+        : 'login';
 }
+
+
+if (
+    $isLoggedIn &&
+    ($page === 'login' || $page === 'signup')
+) {
+
+    header("Location: index.php?page=dashboard");
+    exit;
+}
+
+
 $protectedPages = [
+
     'dashboard',
     'profile',
     'edit-profile',
     'about',
-    'contact',
+    'contact'
+
 ];
 
-if (in_array($page, $protectedPages) && !isset($_SESSION['user'])) {
+
+if (
+    in_array($page, $protectedPages) &&
+    !$isLoggedIn
+) {
+
     header("Location: index.php?page=login");
     exit;
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -40,54 +88,120 @@ if (in_array($page, $protectedPages) && !isset($_SESSION['user'])) {
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>City College | <?php echo ucfirst($page); ?> </title>
+    <title>
+        City College | <?php echo ucfirst($page); ?>
+    </title>
+
+
+    <!-- Font Awesome -->
+
     <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     >
-    <link rel="stylesheet" href="style/style.css">
 
-    <?php if ($page == 'login' || $page == 'signup') { ?>
-        <link rel="stylesheet" href="style/auth.css">
+
+    <!-- Common CSS -->
+
+    <link
+        rel="stylesheet"
+        href="style/style.css"
+    >
+
+
+    <!-- Authentication CSS -->
+
+    <?php if ($page === 'login' || $page === 'signup') { ?>
+
+        <link
+            rel="stylesheet"
+            href="style/auth.css"
+        >
+
     <?php } ?>
 
-    <?php if ($page == 'dashboard' || $page == 'about' || $page == 'contact' || $page == 'edit-profile') { ?>
-        <link rel="stylesheet" href="style/dashboard.css">
+
+    <!-- Dashboard CSS -->
+
+    <?php if (
+        $page === 'dashboard' ||
+        $page === 'about' ||
+        $page === 'contact' ||
+        $page === 'edit-profile'
+    ) { ?>
+
+        <link
+            rel="stylesheet"
+            href="style/dashboard.css"
+        >
+
     <?php } ?>
 
-    <?php if ($page == 'contact') { ?>
-        <link rel="stylesheet" href="style/contact.css">
+
+    <!-- Profile CSS -->
+
+    <?php if (
+        $page === 'profile' ||
+        $page === 'edit-profile'
+    ) { ?>
+
+        <link
+            rel="stylesheet"
+            href="style/profile.css"
+        >
+
     <?php } ?>
 
-    <?php if ($page == 'profile' || $page == 'edit-profile') { ?>
-        <link rel="stylesheet" href="style/profile.css">
-    <?php } ?>
 
-    <?php if ($page == 'contact') { ?>
-        <link rel="stylesheet" href="style/contact.css">
+    <!-- Contact CSS -->
+
+    <?php if ($page === 'contact') { ?>
+
+        <link
+            rel="stylesheet"
+            href="style/contact.css"
+        >
+
     <?php } ?>
 
 </head>
 
+
 <body>
 
-    <?php if ($page !== 'login' && $page !== 'signup') { ?>
-        
+
+    <!-- Navbar -->
+
+    <?php if (
+        $page !== 'login' &&
+        $page !== 'signup'
+    ) { ?>
+
         <?php include "includes/navbar.php"; ?>
 
     <?php } ?>
 
 
+    <!-- Page -->
+
     <main>
+
         <?php include $pages[$page]; ?>
+
     </main>
 
 
-    <?php if ($page !== 'login' && $page !== 'signup') { ?>
+    <!-- Footer -->
+
+    <?php if (
+        $page !== 'login' &&
+        $page !== 'signup'
+    ) { ?>
 
         <?php include "includes/footer.php"; ?>
 
     <?php } ?>
+
 
 </body>
 
