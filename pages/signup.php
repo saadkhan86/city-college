@@ -35,7 +35,7 @@ if (isset($_POST['submit'])) {
 
         if ($result) {
 
-            $message = 'Signup Successful! You can login now.';
+            $message = 'Signup Successful! Redirecting to login';
             $messageType = 'success';
 
         } else {

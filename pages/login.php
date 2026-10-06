@@ -23,7 +23,7 @@ if (isset($_POST['login'])) {
             'id' => $user['id'],
             'full_name' => $user['full_name'],
         ];
-        $message = "Login successful";
+        $message = "Login successful! Redirecting to dashboard...";
         $messageType = "success";
     }
 
